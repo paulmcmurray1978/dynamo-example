@@ -1,6 +1,8 @@
 # dynamo-example
 index.mjs: this will add / update an item when the id has a match
 
+getById/index.mjs will return a record with a matching id
+
 This is node 18
 
 There is a layer for the aws import in our classroom layers section
