@@ -1,21 +1,19 @@
+import * as AWS from 'aws-sdk'
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { QueryCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
-
-export const handler = async (event) => {
-  const command = new QueryCommand({
+export const handler =    async (event) => {
+  const command = new PutCommand({
     TableName: "pwmDynamoDwp",
-    KeyConditionExpression:
-      "id = :id",
-    ExpressionAttributeValues: {
-      ":id": event.pathParams.id,
+    Item: {
+      id: event.pathParams.id.toString(),
+      name:"joh"
     },
-    ConsistentRead: true,
   });
 
   const response = await docClient.send(command);
   console.log(response);
-  return response.Items[0];
+  return response;
 };
